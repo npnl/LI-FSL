@@ -37,6 +37,8 @@ L - cortical | LH = 382; RH = 22; LI = 0.891089  | LH = 101; RH = 0; LI = 1 | LH
 R - subcortical | LH = 335; RH = 68; LI = 0.662531 | LH = 193; RH = 29; LI = 0.738739 | LH = 76; RH = 1; LI = 0.974026 | LI =  0.79176
 R - cortical | LH = 509; RH = 49; LI = 0.824373 | LH = 318; RH = 3; LI = 0.981308 | LH = 216; RH = 0; LI = 1 | LI = 0.93522
 
+![](http://i66.tinypic.com/11i08ra.jpg)
+
 #####Figure 1: A Comparison Across Different Stroke Lesion Profiles at Maximum Lesion
 
 
