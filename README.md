@@ -41,6 +41,7 @@ R - cortical | LH = 509; RH = 49; LI = 0.824373 | LH = 318; RH = 3; LI = 0.98130
 
 #####Figure 1: A Comparison Across Different Stroke Lesion Profiles at Maximum Lesion
 
-
+![](http://i68.tinypic.com/desmxz.jpg)
+Scans of individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. 
 ###References
 Seghier, M. L. (2008). Laterality index in functional MRI: methodological issues. Magnetic resonance imaging, 26(5), 594-601.
