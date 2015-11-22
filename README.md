@@ -30,7 +30,12 @@ We suggest that stroke neuroimaging might benefit from calculating an average LI
 
 #####Table 1: Laterality Index Using a Voxel-Count-based Method in FSL: A Comparison Across Different Stroke Lesion Profiles and Different Thresholds
  
-
+ | z=1.0  | z=1.5 | z=2.3 | mean
+:--: | :--: | :--: | :--:| :--:|
+L - subcortical | LH = 272; RH = 284; LI = -0.021583 | LH = 167; RH = 217; LI = -0.130208 | LH = 37; RH = 123; LI = -0.5375 | LI = -0.22976
+L - cortical | LH = 382; RH = 22; LI = 0.891089  | LH = 101; RH = 0; LI = 1 | LH = 1; RH = 0; LI = 1 | LI = 0.96369
+R - subcortical | LH = 335; RH = 68; LI = 0.662531 | LH = 193; RH = 29; LI = 0.738739 | LH = 76; RH = 1; LI = 0.974026 | LI =  0.79176
+R - cortical | LH = 509; RH = 49; LI = 0.824373 | LH = 318; RH = 3; LI = 0.981308 | LH = 216; RH = 0; LI = 1 | LI = 0.93522
 
 #####Figure 1: A Comparison Across Different Stroke Lesion Profiles at Maximum Lesion
 
