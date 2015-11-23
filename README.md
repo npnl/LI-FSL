@@ -6,7 +6,7 @@ Kaori L. Ito and Sook-Lei Liew
 ###Introduction
 The laterality index (LI) is one way to assess hemispheric dominance in a variety of tasks, such as language, cognitive functions, and changes in laterality in clinical populations, such as after stroke. In stroke neuroimaging, however, an optimal method of calculating the LI remains controversial, largely due to lesion variability in post-stroke brains.
 	
-Two main methods of calculating LI have evolved in neuroimaging literature (Seghier, 2008). The first, more traditional approach counts the number of active voxels in a given region of interest (ROI) for each hemisphere. This method has been criticized for its inability to account for differences in signal intensity. Hence, a second approach calculates laterality based on the percent signal change within a given region; however, this method also has problems, such as difficulty handling negative values. 
+Two main methods of calculating LI have evolved in neuroimaging literature (Jansen et al., 2006). The first, more traditional approach counts the number of active voxels in a given region of interest (ROI) for each hemisphere. This method has been criticized for its inability to account for differences in signal intensity. Hence, a second approach calculates laterality based on the percent signal change within a given region; however, this method also has problems, such as difficulty handling negative values. 
 	
 A laterality toolbox that addresses some of these issues has been implemented in the statistical neuroimaging analysis package SPM, which provides users with options of using either method, along with more advanced statistical tests for robust LI calculations (Wilke & Lidzba, 2007). No such toolbox is yet available for FSL. Therefore, we developed a series of scripts to calculate LI in FSL using both voxel count and percent signal change methods. However, in the interest of space, here we present only results from the more robust method of the two (voxel count method).
 
@@ -37,6 +37,6 @@ We suggest that stroke neuroimaging might benefit from calculating an average LI
 ![](http://i68.tinypic.com/desmxz.jpg)
 MRI scans of individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. 
 ###References
-Seghier, M. L. (2008). Laterality index in functional MRI: methodological issues. Magnetic resonance imaging, 26(5), 594-601.
+Jansen, A., Menke, R., Sommer, J., Förster, A. F., Bruchmann, S., Hempleman, J., ... & Knecht, S. (2006). The assessment of hemispheric lateralization in functional MRI—robustness and reproducibility. Neuroimage, 33(1), 204-217.
 
 Wilke, M., & Lidzba, K. (2007). LI-tool: a new toolbox to assess lateralization in functional MR-data. Journal of neuroscience methods, 163(1), 128-136.
