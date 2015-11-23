@@ -1,42 +1,143 @@
-Calculating the Laterality Index Using FSL for Stroke Neuroimaging Data
-=====
+```
+#!/bin/sh
 
-Kaori L. Ito and Sook-Lei Liew
+#NPNL Lab
+#KLI kaoriito(at)usc.edu 20151030
+#This script will set the whole-brain zstat image to different z-scores, then extract the number of active Voxels for each ROI
 
-###Introduction
-The laterality index (LI) is one way to assess hemispheric dominance in a variety of tasks, such as language, cognitive functions, and changes in laterality in clinical populations, such as after stroke. In stroke neuroimaging, however, an optimal method of calculating the LI remains controversial, largely due to lesion variability in post-stroke brains.
+#####################################
+threshSet=2.3; #set the z-value here
+ROOTDIR=/PATH/TO/DIRECTORY	#root directory with MRI data; this folder should only contain folders for each subject
+ROI_dir=/PATH/TO/ROIs #this directory contains your ROIs in .nii format
+LEV2=NameOfLev2Folder #provide name of level 2 folder within each subject directory
+
+###################################
+cd ~
+cd $ROOTDIR
+pwd
+
+SUBJS=`ls -d *`		#Collects all subjects in main folder (takes in any file name; cannot have non-subject data)
+
+
+mkdir Laterality_Index;
+cd Laterality_Index;
+
+
+for cope in cope1 cope2; do
+	mkdir $cope;
+	cd $cope;
+	mkdir z-$threshSet;
+	cd $ROOTDIR/Laterality_Index;
+done
+
+
+
+#################
+#need to have ROI names in order to loop through roi folders
+#store ROIs
+cd ~
+cd $ROI_dir
+pwd
+ROIs=`ls -a *.nii`; #this will collect the names of all files with .nii so only include ROIs to be used in this folder. Make sure ROIs are labeled with L-ROIname.nii and R-ROIname.nii
+LROIs=`ls -a L_*.nii`; #this will collect ONLY the left ROIs
+RROIs=`ls -a R_*.nii`;
+
+echo $ROIs;
+cd ~
+cd $ROOTDIR
+pwd
+
+#################set the whole-brain zstat image to different z-scores, then extract the number of active Voxels for each ROI and outputs into each subject's folder with separate L-ROI and R-ROI textfiles
+
+for SUB in $SUBJS; do
+	cd $ROOTDIR/$SUB #goes through each subject directory and makes a Laterality Index folder with a separate z-value folder
+	mkdir Laterality_Index;
+	cd Laterality_Index;
+	mkdir z-$threshSet;
+    pwd;
+
+    for ROI in $ROIs; do
+		echo "in for loop";
+	 	for cope in cope1 cope2; do #set for number of copes you want to calculate LI for
+            echo $SUB $ROI $cope;
+            cd $ROOTDIR/$SUB/$LEV2/$cope.feat/stats; #this is the path to your stats folder for each COPE in your second level folder at the subject level (combined runs 1, 2 and 3 in our case)
+            pwd;
+            
+            cluster -i zstat1.nii.gz --zthresh=$threshSet -o cluster_index --othresh=zstat1-$threshSet.nii #this sets the threshold and outputs the thresholded image to zstat1-$threshsSet.nii (e.g., zstat1-2.3.nii)            
+            fslstats zstat1-$threshSet.nii.gz -k $ROI_dir/$ROI -V >> $ROOTDIR/$SUB/Laterality_Index/z-$threshSet/$ROI-$cope-voxels.txt #this takes the number of active voxels within the ROI and outputs it into a textfile labeled with the ROI name and cope number
+            
+        done
+
+    done
+
+    cd $ROOTDIR;
+
+done
+
+#################takes the R and L active voxel values frome each subject and reorganizes them for use in a group folder
+
+#loop through all subjects
+for SUB in $SUBJS; do
+
+	#get magnitude signal change val from each ROI, Left and Right
 	
-Two main methods of calculating LI have evolved in neuroimaging literature (Jansen et al., 2006). The first, more traditional approach counts the number of active voxels in a given region of interest (ROI) for each hemisphere. This method has been criticized for its inability to account for differences in signal intensity. Hence, a second approach calculates laterality based on the percent signal change within a given region; however, this method also has problems, such as difficulty handling negative values. 
+	cd $SUB/Laterality_Index;
+	threshDIRs=`ls -d *`;
 	
-A laterality toolbox that addresses some of these issues has been implemented in the statistical neuroimaging analysis package SPM, which provides users with options of using either method, along with more advanced statistical tests for robust LI calculations (Wilke & Lidzba, 2007). No such toolbox is yet available for FSL. Therefore, we developed a series of scripts to calculate LI in FSL using both voxel count and percent signal change methods. However, in the interest of space, here we present only results from the more robust method of the two (voxel count method).
+	for threshDIR in $threshDIRs; do 
+		cd $threshDIR;
 
-###Approach
+		for LROI in $LROIs; do
+		
+			ROI_string2find=${LROI:2};
+		
+			echo $ROI_string2find;
+			
+			echo Left ROI;
+			echo $LROI;
+		
+			for cope in cope1 cope2; do
+				filename_L=$LROI-$cope-voxels.txt;
+			
+				for RROI in $RROIs; do
+					if [[ "$RROI" =~ "$ROI_string2find" ]] #if LROI matches RROI substring then
+					then
+						echo "found it!"
+						filename_R=$RROI-$cope-voxels.txt; #set filename_R to current RROI
+					fi
+				done	
+				echo $filename_R;
+				echo $filename_L;
+				
+				#read vals from filenames
+				LeftVal=$(cat "$filename_L");
+				RightVal=$(cat "$filename_R");		
+				pwd; 
+				echo $LeftVal;
+				echo $RightVal;
+				echo subject $SUB 
+				echo $LeftVal > $ROOTDIR/Laterality_Index/$cope/$threshDIR/${ROI_string2find}_$SUB.txt; #in two cope folders
+				echo $RightVal >> $ROOTDIR/Laterality_Index/$cope/$threshDIR/${ROI_string2find}_$SUB.txt;
+				#output $LeftVal and $RightVal to own txt file
+					
+		
+			done
+			
+			
+		done
+		
+		cd $ROOTDIR/$SUB/Laterality_Index;
+	done
 	
-We used fMRI data from two groups of stroke participants who either had right or left hemisphere lesions. Participants observed videos of right or left hand actions, and resulting statistical maps were calculated for each individual. The LI was then calculated per participant, based on the number of active voxels within a given anatomically-defined ROI (the inferior frontal gyrus, pars opercularis). Using the “cluster” tool in FSL, we set a threshold on the second-level whole-brain map. We set a range of z-values (z=1.0, z=1.5, z=2.3) to test the effects of different thresholds. We then utilized “fslstats” to determine the total number of active voxels in both left and right hemisphere ROIs. Finally, we calculated LI based on the equation:
-
-    LI=(L-R)/(L+R)
-
-where *L* represents the number of active voxels in the left-hemisphere ROI and *R* is the number of active voxels in the right-hemisphere ROI. This yields a value for LI such that -1 < *LI* < +1, where a positive value indicates left-hemisphere dominance and a negative value indicates right-hemisphere dominance. 
-
-###Results/Discussion
+	cd $ROOTDIR;
 	
-We examined the variability in LI at different z-value thresholds to look at laterality differences in individuals with cortical versus subcortical stroke as well as the affected hemisphere (R vs. L). The LI values of four representative individuals with the following types of stroke were as follows (see Table 1): subcortical left-hemisphere stroke (mean LI = -0.23; right lateralized), subcortical right-hemisphere stroke (mean LI = 0.79; left lateralized), cortical left-hemisphere stroke (mean LI = 0.96, left lateralized), and cortical right-hemisphere stroke (mean LI = 0.94, left lateralized). These LI results corresponded with our whole brain observations (not included here).
+done
 
-Importantly, we notice that the voxel count method is highly dependent on the threshold value: as the threshold increases in stringency, the value of the LI increases. With individuals after stroke, higher thresholds may yield 0 active voxels, leading to a potentially skewed LI (LI=1). 
 
-###Conclusions
+#####################
 
-We suggest that stroke neuroimaging might benefit from calculating an average LI across different thresholds (including more lenient thresholds such as z=1.0), in order to provide a more robust outcome that takes into account threshold dependency. This is especially true for individuals with cortical strokes, where the ROI may overlap with the lesion and yield 0 active voxels. This issue of thresholding, specifically for stroke research, is an interesting question that remains to be addressed further. Our scripts for these calculations may be found online at <http://chan.usc.edu/npnl/resources>.
 
-#####Table 1: Laterality Index Using a Voxel-Count-based Method in FSL: A Comparison Across Different Stroke Lesion Profiles and Different Thresholds
 
-![](http://i66.tinypic.com/11i08ra.jpg)
 
-#####Figure 1: A Comparison Across Different Stroke Lesion Profiles at Maximum Lesion
 
-![](http://i68.tinypic.com/desmxz.jpg)
-MRI scans of individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. 
-###References
-Jansen, A., Menke, R., Sommer, J., Förster, A. F., Bruchmann, S., Hempleman, J., ... & Knecht, S. (2006). The assessment of hemispheric lateralization in functional MRI—robustness and reproducibility. Neuroimage, 33(1), 204-217.
-
-Wilke, M., & Lidzba, K. (2007). LI-tool: a new toolbox to assess lateralization in functional MR-data. Journal of neuroscience methods, 163(1), 128-136.
+```
