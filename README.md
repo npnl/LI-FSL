@@ -27,7 +27,7 @@ for j=1:m
     rightVal = valsInfile(2);
     disp(leftVal);
     disp(rightVal);
-    LI = (leftVal - rightVal) / (abs(leftVal) + abs(rightVal));
+    LI = (leftVal - rightVal) / (leftVal + rightVal);
     disp(LI);
 
     fileID = fopen(textfile, 'a');
