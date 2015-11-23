@@ -8,7 +8,7 @@ The laterality index (LI) is one way to assess hemispheric dominance in a variet
 	
 Two main methods of calculating LI have evolved in neuroimaging literature (Seghier, 2008). The first, more traditional approach counts the number of active voxels in a given region of interest (ROI) for each hemisphere. This method has been criticized for its inability to account for differences in signal intensity. Hence, a second approach calculates laterality based on the percent signal change within a given region; however, this method also has problems, such as difficulty handling negative values. 
 	
-A laterality toolbox that addresses some of these issues has been implemented in the statistical neuroimaging analysis package SPM, which provides users with options of using either method, along with more advanced statistical tests for robust LI calculations. No such toolbox is yet available for FSL. Therefore, we developed a series of scripts to calculate LI in FSL using both voxel count and percent signal change methods. However, in the interest of space, here we present only results from the more robust method of the two (voxel count method).
+A laterality toolbox that addresses some of these issues has been implemented in the statistical neuroimaging analysis package SPM, which provides users with options of using either method, along with more advanced statistical tests for robust LI calculations (Wilke & Lidzba, 2007). No such toolbox is yet available for FSL. Therefore, we developed a series of scripts to calculate LI in FSL using both voxel count and percent signal change methods. However, in the interest of space, here we present only results from the more robust method of the two (voxel count method).
 
 ###Approach
 	
@@ -29,13 +29,6 @@ Importantly, we notice that the voxel count method is highly dependent on the th
 We suggest that stroke neuroimaging might benefit from calculating an average LI across different thresholds (including more lenient thresholds such as z=1.0), in order to provide a more robust outcome that takes into account threshold dependency. This is especially true for individuals with cortical strokes, where the ROI may overlap with the lesion and yield 0 active voxels. This issue of thresholding, specifically for stroke research, is an interesting question that remains to be addressed further. Our scripts for these calculations may be found online at <http://chan.usc.edu/npnl/resources>.
 
 #####Table 1: Laterality Index Using a Voxel-Count-based Method in FSL: A Comparison Across Different Stroke Lesion Profiles and Different Thresholds
- 
- | z=1.0  | z=1.5 | z=2.3 | mean
-:--: | :--: | :--: | :--:| :--:|
-L - subcortical | LH = 272; RH = 284; LI = -0.021583 | LH = 167; RH = 217; LI = -0.130208 | LH = 37; RH = 123; LI = -0.5375 | LI = -0.22976
-L - cortical | LH = 382; RH = 22; LI = 0.891089  | LH = 101; RH = 0; LI = 1 | LH = 1; RH = 0; LI = 1 | LI = 0.96369
-R - subcortical | LH = 335; RH = 68; LI = 0.662531 | LH = 193; RH = 29; LI = 0.738739 | LH = 76; RH = 1; LI = 0.974026 | LI =  0.79176
-R - cortical | LH = 509; RH = 49; LI = 0.824373 | LH = 318; RH = 3; LI = 0.981308 | LH = 216; RH = 0; LI = 1 | LI = 0.93522
 
 ![](http://i66.tinypic.com/11i08ra.jpg)
 
@@ -45,3 +38,5 @@ R - cortical | LH = 509; RH = 49; LI = 0.824373 | LH = 318; RH = 3; LI = 0.98130
 MRI scans of individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. 
 ###References
 Seghier, M. L. (2008). Laterality index in functional MRI: methodological issues. Magnetic resonance imaging, 26(5), 594-601.
+
+Wilke, M., & Lidzba, K. (2007). LI-tool: a new toolbox to assess lateralization in functional MR-data. Journal of neuroscience methods, 163(1), 128-136.
