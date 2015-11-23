@@ -16,7 +16,7 @@ We used fMRI data from two groups of stroke participants who either had right or
 
     LI=(L-R)/(L+R)
 
-where *L* represents the number of active voxels in the left-hemisphere ROI and *R* is the number of active voxels in the right-hemisphere ROI. This yields a value for LI such that -1 </= *LI* </= +1, where a positive value indicates left-hemisphere dominance and a negative value indicates right-hemisphere dominance. 
+where *L* represents the number of active voxels in the left-hemisphere ROI and *R* is the number of active voxels in the right-hemisphere ROI. This yields a value for LI such that -1 < *LI* < +1, where a positive value indicates left-hemisphere dominance and a negative value indicates right-hemisphere dominance. 
 
 ###Results/Discussion
 	
