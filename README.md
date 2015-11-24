@@ -4,7 +4,7 @@
 #NPNL Lab
 #KLI kaoriito(at)usc.edu 20151030
 #Part 1
-#This script will set the whole-brain zstat image to different z-scores, then extract the number of active Voxels for each ROI
+#This script will set the whole-brain zstat image to different z-scores, then extract the number of active Voxels for each #roi
 
 #####################################
 threshSet=2.3; #set the z-value here
