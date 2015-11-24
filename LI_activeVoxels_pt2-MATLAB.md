@@ -2,12 +2,17 @@
 
 %Calculate LI
 %20151106 KLI
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %remember to delete unnecessary textfiles or it will not run
 clear;
 ROOTDIR='/PATH/TO/DIRECTORY'; %set ROOTDIR
 COPE='cope1'; %choose cope folder
 zthresh='2.3'; %choose z-value
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cd(fullfile([ROOTDIR '/Laterality_Index/' COPE '/z-' zthresh]))
 
