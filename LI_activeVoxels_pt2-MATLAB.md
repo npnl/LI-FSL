@@ -4,7 +4,7 @@
 %KLI kaoriito(at)usc.edu 20151030
 %Part 2
 %This script takes in the number of active voxels in the right and left hemisphere ROI and then calculates the LI in MATLAB
-%This has to be done in matlab since there is no mathematical functions in bash
+%Script will be run in matlab since there is no mathematical functions in bash
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
