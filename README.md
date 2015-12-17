@@ -10,12 +10,12 @@ author:
   firstname: Kaori L.
   email: kaoriito@usc.edu
   affiliation: aff1
-  corref: aff1
 - initials: SLL
   surname: Liew
   firstname: Sook-Lei 
   email: sliew@chan.usc.edu
   affiliation: aff1
+  corref: aff1
 
 affiliations: 
 
