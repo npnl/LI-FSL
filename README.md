@@ -84,6 +84,13 @@ We examined the variability in LI at different z-value thresholds to look at lat
   A Comparison Across Different Stroke Lesion Profiles at Maximum Lesion. MRI scans of individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. }
 \end{figure}
 
+\begin{figure}[h!]
+  \includegraphics[width=.47\textwidth]{activation_standardSpace.jpg}
+  \caption{\label{fig2}
+  Overlap Between Activation in ROI and Lesion. Activity in the inferior frontal gyrus, pars opercularis at z=1.5 for individuals who sustained A. subcortical left-hemisphere stroke, B. cortical left-hemisphere stroke, C. subcortical right-hemisphere stroke, D. cortical right-hemisphere stroke. Images were registered to standard space. }
+\end{figure}
+
+
 Importantly, we notice that the voxel count method is highly dependent on the threshold value: as the threshold increases in stringency, the value of the LI increases. With individuals after stroke, higher thresholds may yield 0 active voxels, leading to a potentially skewed LI (LI=1). 
 
 #Conclusions
