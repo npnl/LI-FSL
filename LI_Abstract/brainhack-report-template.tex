@@ -109,9 +109,21 @@ $if(author.initials)$
 $if(author.surname)$
 $if(author.firstname)$
 \author[
-$if(author.affiliation)$addressref={$author.affiliation$},$else$\emph{No Affiliation}$endif$
-$if(author.corref)$corref={$author.corref$},$else$%$endif$
-$if(author.email)$email={$author.email$}$else$\emph{No Email}$endif$
+$if(author.affiliation)$ 
+$if(author.corref)$
+$if(author.email)$
+addressref={$author.affiliation$},
+corref={$author.corref$},
+email={$author.email$}
+$else$
+addressref={$author.affiliation$},
+corref={$author.corref$},
+\emph{No Email}
+$endif$
+$else$
+addressref={$author.affiliation$}
+$endif$
+$else$\emph{No Affiliation}$endif$
 ]{\inits{$author.initials$} \fnm{$author.firstname$} \snm{$author.surname$}}
 $endif$
 $endif$

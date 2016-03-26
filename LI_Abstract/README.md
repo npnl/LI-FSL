@@ -31,7 +31,7 @@ url: http://github.com/npnl/LI_FSL
 
 coi: None
 
-acknow: The authors would like to thank the organizers and attendees of Brainhack LA and the developers of FSL. This project was funded in part by a Educational Research Grant from Amazon Web Services.
+acknow: The authors would like to thank the organizers and attendees of Brainhack LA and the developers of FSL.
 
 contrib: KLI and SLL wrote the software,  performed tests, and wrote the report.
   
